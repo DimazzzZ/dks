@@ -1,0 +1,2 @@
+# dks
+Declarative Knowledge Schema

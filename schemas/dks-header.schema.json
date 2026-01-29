@@ -1,0 +1,63 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "DKS Header Schema",
+  "description": "Schema for validating the YAML frontmatter of DKS files",
+  "type": "object",
+  "required": [
+    "dks_version",
+    "id",
+    "type",
+    "activation"
+  ],
+  "properties": {
+    "dks_version": {
+      "type": "string",
+      "pattern": "^[0-9]+\\.[0-9]+$"
+    },
+    "id": {
+      "type": "string",
+      "description": "Unique identifier for this knowledge node"
+    },
+    "type": {
+      "type": "string",
+      "enum": [
+        "knowledge_node",
+        "rule_set",
+        "tool_definition"
+      ]
+    },
+    "security_level": {
+      "type": "string",
+      "enum": [
+        "advisory",
+        "strict",
+        "critical"
+      ],
+      "default": "advisory",
+      "description": "Strict/Critical rules must be injected into System Prompt, Advisory into User Context"
+    },
+    "activation": {
+      "type": "object",
+      "properties": {
+        "on_files": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Glob patterns that trigger this file loading"
+        },
+        "on_topics": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Keywords that trigger this file loading"
+        }
+      },
+      "minProperties": 1
+    },
+    "author": {
+      "type": "string"
+    }
+  }
+}
